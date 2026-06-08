@@ -70,3 +70,77 @@ locals {
     }
   }
 }
+
+locals {
+  network_security_rules = {
+    deny_internet_inbound_management = {
+      name                       = "deny-internet-inbound"
+      nsg_key                    = "management"
+      priority                   = 4000
+      direction                  = "Inbound"
+      access                     = "Deny"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "Internet"
+      destination_address_prefix = "*"
+      purpose                    = "explicitly deny inbound traffic from the Internet"
+    }
+
+    deny_internet_inbound_servers = {
+      name                       = "deny-internet-inbound"
+      nsg_key                    = "servers"
+      priority                   = 4000
+      direction                  = "Inbound"
+      access                     = "Deny"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "Internet"
+      destination_address_prefix = "*"
+      purpose                    = "explicitly deny inbound traffic from the Internet"
+    }
+
+    deny_internet_inbound_private = {
+      name                       = "deny-internet-inbound"
+      nsg_key                    = "private"
+      priority                   = 4000
+      direction                  = "Inbound"
+      access                     = "Deny"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "Internet"
+      destination_address_prefix = "*"
+      purpose                    = "explicitly deny inbound traffic from the Internet"
+    }
+
+    allow_management_to_servers_admin = {
+      name                         = "allow-mgmt-to-servers-admin"
+      nsg_key                      = "servers"
+      priority                     = 100
+      direction                    = "Inbound"
+      access                       = "Allow"
+      protocol                     = "Tcp"
+      source_port_range            = "*"
+      destination_port_ranges      = ["22", "3389"]
+      source_address_prefix        = "10.10.1.0/24"
+      destination_address_prefixes = ["10.10.2.0/24"]
+      purpose                      = "allow controlled administrative access from management subnet to servers subnet"
+    }
+
+    deny_vnet_inbound_private = {
+      name                         = "deny-vnet-inbound-private"
+      nsg_key                      = "private"
+      priority                     = 3000
+      direction                    = "Inbound"
+      access                       = "Deny"
+      protocol                     = "*"
+      source_port_range            = "*"
+      destination_port_range       = "*"
+      source_address_prefix        = "VirtualNetwork"
+      destination_address_prefixes = ["10.10.3.0/24"]
+      purpose                      = "deny lateral movement into the private subnet"
+    }
+  }
+}

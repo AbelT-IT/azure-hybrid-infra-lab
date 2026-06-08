@@ -22,3 +22,7 @@ Thumbs.db
 *.pfx
 *.crt
 .env
+
+# Terraform plan files
+*.tfplan
+tfplan

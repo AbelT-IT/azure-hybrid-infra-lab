@@ -4,14 +4,6 @@ This project simulates a realistic enterprise Azure infrastructure environment b
 
 The goal is to design, deploy, secure, monitor and document a hybrid-ready Azure foundation using Infrastructure as Code principles.
 
-## Target Roles
-
-This project is designed to prepare for roles such as:
-
-- Azure Infrastructure Engineer
-- Cloud Infrastructure Engineer
-- Hybrid Infrastructure Engineer
-- Cloud Operations Engineer
 
 ## Scope
 
